@@ -21,17 +21,18 @@ export default function TableData({taches}) {
   }
 
   return (
-    <div className='mx-auto max-w-screen-md'>
-      <div className="flex items-center justify-between p-4 bg-blue-200 text-black rounded-tl-md rounded-tr-md">
-        <h1 className="text-2xl font-bold">Task</h1>
+   
+    <div className='mx-auto max-w-screen-md w-[90%] mt-48 '>
+     
         
-          <button className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600" onClick={()=>handleRoute("Add")}>
+        <div className="flex justify-end mt-12">
+          <button className="px-4 py-2 text-white font-bold bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 shadow-lg transform -skew-y-6 sm:skew-y-0  sm:rounded-xl w-[20%]" onClick={()=>handleRoute("Add")}>
             Add task
           </button>
         
       </div>
-      <Table hoverable className='bg-gray-300'>
-        <Table.Head>
+      <Table hoverable className='bg-gray-200 mt-12 border-b-2  '>
+        <Table.Head  >
           <Table.HeadCell>
             Task name
           </Table.HeadCell>
@@ -50,13 +51,13 @@ export default function TableData({taches}) {
             taches.map((e,i)=>{
               
               return  ( <Table.Row key={i} className="bg-white">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                 {e.name}
               </Table.Cell>
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900"> 
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 "> 
                 {e.description}
               </Table.Cell>
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                 {e.status}
               </Table.Cell>
               <Table.Cell>

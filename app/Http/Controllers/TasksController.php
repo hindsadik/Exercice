@@ -10,7 +10,7 @@ class TasksController extends Controller
 {
     public function index(){
         $taches = Tache::all();
-        return Inertia::render('Taches/Index',['taches'=>$taches]);
+        return Inertia::render('Taches/index',['taches'=>$taches]);
     }
     public function store(Request $request){
         $request->validate([
@@ -22,17 +22,19 @@ class TasksController extends Controller
 
         return redirect()->route("taches.index");
     }
+
+    public function create(){
+        $statusTags = ['start', 'in progress', 'finished'];
+        return Inertia::render('Taches/Create',['statusTags'=>$statusTags]);
+    }
     public function edit($id){
         $data = [
             'tache' => Tache::findOrFail($id),
             'statusTags' => ['start', 'in progress', 'finished']
         ];
-        $tache = Tache::findOrFail($id);
-        $statusTags = ['start', 'in progress', 'finished'];
 
         return Inertia::render('Taches/Edit',[
-            'tache'=>$tache,
-            'statusTags'=>$statusTags
+            'data'=>$data
         ]);
     }
     public function update(Request $request , $id){
@@ -48,6 +50,6 @@ class TasksController extends Controller
     public function destroy($id){
         $tache = Tache::findorFail($id);
         $tache->delete();
-        return redirect()->route('taches.index');
+        return redirect('/taches');
     }
 }

@@ -4,8 +4,6 @@ import {createInertiaApp } from '@inertiajs/inertia-react'
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers'
 import 'tailwindcss/tailwind.css';
 
-
-
 createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`,import.meta.glob('./Pages/**/*.jsx')),
     setup({ el, App, props }) {

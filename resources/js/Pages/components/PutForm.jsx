@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Label, TextInput, Select } from 'flowbite-react';
 import { useForm } from '@inertiajs/inertia-react';
 
@@ -19,6 +19,10 @@ export default function PutForm({ task }) {
     function handleSelectChange(event) {
         setData('status', event.target.value)
     }
+
+    useEffect(() => {
+        console.log(data.status);
+    }, [data]);
 
     const submit = e => {
         e.preventDefault();
@@ -69,6 +73,7 @@ export default function PutForm({ task }) {
                                         <Select
                                             id="j"
                                             required
+                                            value={data.status}
                                             onChange={handleSelectChange}
                                         >
                                             {status.map((e, i) => (

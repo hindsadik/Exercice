@@ -1,18 +1,19 @@
-'use client';
-
-import { Table } from 'flowbite-react';
+import { Table, Button, Modal } from 'flowbite-react';
 import { Head, Link } from '@inertiajs/inertia-react'
-import { Button, Modal } from 'flowbite-react';
 import { useState } from 'react';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function TableData({ tasks }) {
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState();
+  const props = { openModal, setOpenModal };
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
+  const submit = (event, taskId) => {
+    event.preventDefault();
+    Inertia.delete(route('task.destroy', taskId));
+    props.setOpenModal(undefined);
   };
+
   <Head>Tasks</Head>
   return (
 
@@ -53,33 +54,30 @@ export default function TableData({ tasks }) {
                 {e.status}
               </Table.Cell>
               <Table.Cell>
-                <div className='flex justify-between '>
-                  <Link
-                    className="font-medium text-cyan-600 hover:underline"
-                    href={route('task.edit', e.id)}>
-                    Edit
-                  </Link>
-                  <Button onClick={toggleModal}>Toggle modal</Button>
-                  <Modal open={isOpen} onClose={toggleModal}>
-                    <Modal.Header>Terms of Service</Modal.Header>
+                <div className='flex'>
+                  <Button>
+                    <Link
+                      href={route('task.edit', e.id)}>
+                      Edit
+                    </Link>
+                  </Button>
+                  <Button onClick={() => props.setOpenModal('default')}>Toggle modal</Button>
+                  <Modal show={props.openModal === 'default'} onClose={() => props.setOpenModal(undefined)}>
+                    <Modal.Header>Confirm Delete</Modal.Header>
                     <Modal.Body>
                       <div className="space-y-6">
                         <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          With less than a month to go before the European Union enacts new consumer privacy laws for its citizens,
-                          companies around the world are updating their terms of service agreements to comply.
-                        </p>
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to
-                          ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as
-                          possible of high-risk data breaches that could personally affect them.
+                          Are you sure you want to delete this task?
                         </p>
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={toggleModal}>I accept</Button>
-                      <Button color="gray" onClick={toggleModal}>
-                        Decline
-                      </Button>
+                      <form onSubmit={(event) => submit(event, e.id)}>
+                        <Button type="submit">Delete</Button>
+                        <Button color="gray" onClick={() => props.setOpenModal(undefined)}>
+                          Cancel
+                        </Button>
+                      </form>
                     </Modal.Footer>
                   </Modal>
                 </div>

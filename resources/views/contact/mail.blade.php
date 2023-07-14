@@ -29,7 +29,7 @@
 }
 
 .container-hover:hover>table {
-    background: linear-gradient(153.06deg, #7EE8FA -0.31%, #EEC0C6 99.69%) !important;
+    background: linear-gradient(153.06deg, #08515e -0.31%, #EEC0C6 99.69%) !important;
     transition: 0.3s all !important;
 }
 

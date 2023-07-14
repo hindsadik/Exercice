@@ -30,7 +30,7 @@ class TasksController extends Controller
         $task->save();
 
         if ($task->id) {
-            Mail::to('ifiag@gmail.com')->send(new ContactMail('hindsadik@gmail.com', 'La tâche a été correctement terminée.', 'Fin'));
+            Mail::to('ifiag@gmail.com')->send(new ContactMail('se.loukhmi@gmail.com', 'Task created successfully', 'Thank you'));
         }
         
         return to_route('task.index');

@@ -16,13 +16,14 @@ export default function PutForm({ task }) {
         { id: 3, name: 'finished' }
     ];
 
+    
     function handleSelectChange(event) {
         setData('status', event.target.value)
-    }
+    } //select change 
 
     useEffect(() => {
         console.log(data.status);
-    }, [data]);
+    }, [data]); 
 
     const submit = e => {
         e.preventDefault();
@@ -53,8 +54,8 @@ export default function PutForm({ task }) {
                                         <Label htmlFor="taskDescription" value="Task Description" />
                                         <TextInput
                                             placeholder="Enter task description"
-                                            value={data.description}
-                                            onChange={e => setData('description', e.target.value)}
+                                            value={data.description} //variable
+                                            onChange={e => setData('description', e.target.value)} //fonction
                                             rows={4}
                                             style={{ padding: '20px', Height: "40px" }}
                                         />

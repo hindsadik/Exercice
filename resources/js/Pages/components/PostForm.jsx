@@ -13,7 +13,7 @@ export default function PostForm() {
     e.preventDefault();
     post(route('task.store'));
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-100  flex flex-col justify-center ">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto w-[50%]">
